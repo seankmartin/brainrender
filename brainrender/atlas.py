@@ -22,9 +22,7 @@ class Atlas(BrainGlobeAtlas):
         self.atlas_name = atlas_name
         logger.debug(f"Generating ATLAS: {atlas_name}")
 
-        BrainGlobeAtlas.__init__(
-            self, atlas_name=atlas_name, print_authors=False
-        )
+        BrainGlobeAtlas.__init__(self, atlas_name=atlas_name)
 
     @property
     def zoom(self):
