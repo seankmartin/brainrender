@@ -28,7 +28,7 @@ def make_actor_label(
     Adds a 2D text ancored to a point on the actor's mesh
     to label what the actor is
 
-    :param kwargs: key word arguments can be passed to determine
+    :param kwargs: keyword arguments can be passed to determine
             text appearance and location:
                 - size: int, text size. Default 300
                 - color: str, text color. A list of colors can be passed
@@ -114,7 +114,7 @@ class Actor(object):
 
         :param mesh: instance of vedo.Mesh
         :param name: str, actor name
-        :param br_class: str, name of brainrende actors class
+        :param br_class: str, name of brainrender actors class
         :param is_text: bool, is it a 2d text or annotation?
         :param color: str, name or hex code of color to assign to actor's mesh
         :param alpha: float, transparency to assign to actor's mesh
@@ -132,7 +132,7 @@ class Actor(object):
     def __getattr__(self, attr):
         """
         If an unknown attribute is called, try `self.mesh.attr`
-        to get the meshe's attribute
+        to get the mesh's attribute
         """
         if "mesh" not in self.__dict__.keys():
             raise AttributeError(
@@ -168,7 +168,7 @@ class Actor(object):
 
     @property
     def center(self):
-        """ returns the coordinates of the mesh's center """
+        """Returns the coordinates of the mesh's center """
         return self.mesh.points().mean(axis=0)
 
     @classmethod
