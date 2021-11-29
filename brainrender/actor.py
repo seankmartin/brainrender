@@ -136,7 +136,7 @@ class Actor(object):
         """
         if "mesh" not in self.__dict__.keys():
             raise AttributeError(
-                f"Actor doesn not have attribute {attr}"
+                f"Actor does not have attribute {attr}"
             )  # pragma: no cover
 
         # some attributes should be from .mesh, others from ._mesh
@@ -153,7 +153,7 @@ class Actor(object):
                     return getattr(self.__dict__["mesh"], attr)
 
         raise AttributeError(
-            f"Actor doesn not have attribute {attr}"
+            f"Actor does not have attribute {attr}"
         )  # pragma: no cover
 
     def __repr__(self):  # pragma: no cover
