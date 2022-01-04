@@ -18,8 +18,13 @@ brainrender.settings.BACKGROUND_COLOR = [
     0.22,
     0.22,
 ]  # change rendering background color
+
 brainrender.settings.WHOLE_SCREEN = (
     False  # make the rendering window be smaller
+)
+
+brainrender.settings.SHOW_AXES = (
+    False  # turn off the axes display
 )
 
 # make scenes with different shader styles
