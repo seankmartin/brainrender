@@ -15,6 +15,7 @@ from brainrender.camera import (
     set_camera,
     get_camera_params,
 )
+from brainrender.actors.points import PointsDensity
 
 
 # mtx used to transform meshes to sort axes orientation
@@ -116,6 +117,12 @@ class Render:
 
         Once an actor is 'corrected' it spawns labels and silhouettes as needed
         """
+        # don't apply transforms to points density actors
+        if isinstance(actor, PointsDensity):
+            logger.debug(
+                f'Not transforming actor "{actor.name} (type: {actor.br_class})"'
+            )
+            actor._is_transformed = True
 
         # Flip every actor's orientation
         if not actor._is_transformed:
@@ -123,11 +130,17 @@ class Render:
                 actor._mesh = actor.mesh.clone()
                 actor._mesh.applyTransform(mtx)
             except AttributeError:  # some types of actors dont trasform
+                logger.debug(
+                    f'Failed to transform actor: "{actor.name} (type: {actor.br_class})"'
+                )
                 actor._is_transformed = True
             else:
                 try:
                     actor.mesh.reverse()
                 except AttributeError:  # Volumes don't have reverse
+                    logger.debug(
+                        f'Failed to reverse actor: "{actor.name} (type: {actor.br_class})"'
+                    )
                     pass
                 actor._is_transformed = True
 
@@ -221,7 +234,7 @@ class Render:
             else:
                 label._mesh = label.mesh.clone()
                 self._prepare_actor(label)
-                self.plotter.add(label._mesh)
+                self.plotter.add(label._mesh.reverse())
                 label._is_added = True
 
         # Apply style
@@ -235,9 +248,6 @@ class Render:
         if not self.backend:  # not running in a python script
             if interactive is None:
                 interactive = settings.INTERACTIVE
-
-            for txt in self.labels:
-                txt.followCamera(self.plotter.camera)
 
             self.plotter.show(
                 interactive=interactive,
