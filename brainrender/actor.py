@@ -32,7 +32,7 @@ def make_actor_label(
             text appearance and location:
                 - size: int, text size. Default 300
                 - color: str, text color. A list of colors can be passed
-                        if None the actor's color is used. Default None.
+                        if None a gray color is used. Default None.
                 - xoffset, yoffset, zoffset: integers that shift the label position
                 - radius: radius of sphere used to denote label anchor. Set to 0 or None to hide.
     """
@@ -44,7 +44,7 @@ def make_actor_label(
 
         # Get label color
         if color is None:
-            color = actor.mesh.color()
+            color = [0.2, 0.2, 0.2]
 
         # Get mesh's highest point
         points = actor.mesh.points().copy()
