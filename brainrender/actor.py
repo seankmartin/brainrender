@@ -44,7 +44,7 @@ def make_actor_label(
 
         # Get label color
         if color is None:
-            color = [0.2, 0.2, 0.2]
+            color = actor.mesh.color()
 
         # Get mesh's highest point
         points = actor.mesh.points().copy()
